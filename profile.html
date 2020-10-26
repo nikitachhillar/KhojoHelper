@@ -1,0 +1,80 @@
+<?php
+session_start();
+?>
+<!doctype HTML>
+<html>
+<head> 
+    <title>Khojo Helper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="Login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet"> 
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+<body>
+
+<form action="profile.php" method="post">
+  <div class="row">
+    <div class="col">
+      <label>Category: </label> <select class="form-control" name="category">
+    <option>Electrician</option>
+        <option>Labour</option>
+        <option>Tiles Mason</option>
+        <option>Plumber</option>
+  </select>
+    </div>
+    <div class="col">
+        <label> City: </label>
+      <input type="text" class="form-control" placeholder="Enter City" name="city">
+    </div>
+    <div class="col">
+    <label>District: </label>  
+    <input type="text" class="form-control" placeholder="Enter District" name="district">
+    </div>
+    <div class="col">
+    <label>State: </label>  
+    <input type="text" class="form-control" placeholder="Enter State" name="state">
+    </div>
+  </div>
+    <hr>
+    <button type="submit" class="btn">Search</button> 
+</form>
+
+   <?php 
+$city=$_SESSION["cty"];
+$district=$_SESSION["dis"];
+$category=$_SESSION["cat"];
+$state=$_SESSION["sta"];
+$conn=mysqli_connect("localhost:3308", "root", "", "khojo_helper");
+
+$query="SELECT * from workers where Category='".$category."'AND State='".$state."' ";
+    $result=mysqli_query($conn,$query) or die(mysqli_error($conn));
+ echo "<table border='1px'>";
+ while($row=mysqli_fetch_array($result))
+{
+    $Title=$row[1];
+    $Name=$row[2];
+    $Lastname=$row[3];
+    $Gender=$row[4];
+
+    echo "<tr>";
+    echo "<td>{$Title}</td>";
+    echo "<td>{$Name}</td>";
+    echo "<td>{Lastname}</td>";
+    echo "<td>{$Gender}</td>";
+    echo "</tr>";
+}
+echo "</table>";
+
+?>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<?php
+session_start();
+?>
+<!doctype HTML>
+<html>
+<head> 
+    <title>Khojo Helper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="Login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet"> 
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+<body>
+
+    <div style="background:transparent !important"  class="jumbotron">
+  <h1> <center>Welcome
+    <!--Username-->
+    
+    <?php
+    
+    $email=$_SESSION["emailid"];
+
+
+	$conn=mysqli_connect("localhost:3308", "root", "", "khojo_helper");
+
+	$query="SELECT * from users where Email='".$email."' ";
+    $result=mysqli_query($conn,$query) or die(mysqli_error($conn));
+ 
+    $row=mysqli_fetch_row($result);
+    echo $row[1];
+    
+?>
+      </center>
+    </h1>
+    </div>
+    <!-- Side Bar Menu-->
+  
+        <button class="tablink" onclick="openPage('Search', this, 'cadetblue')" id="defaultOpen" >Search Your Helper</button>
+
+<div id="Search" class="tabcontent">
+     <iframe src="profile.html" width="100%" height="600" style="border:none;" scrolling="no"></iframe> 
+  </div>
+
+    <script >function openPage(pageName, elmnt, color) {
+   var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click(); </script>
+    
+      
+
+    
+    
+</body>
+</html>
