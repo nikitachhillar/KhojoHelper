@@ -19,12 +19,12 @@ session_start();
         $result=mysqli_query($conn,$sql); 
         if(mysqli_num_rows($result)==1)
         {
-             header('Location:Login.html');
+             header('Location:index.html');
             exit();
         }
         else
         {
-           header('Location:Home.html');
+           header('Location:index.html');
         }
     }
      

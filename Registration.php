@@ -39,7 +39,7 @@ if ($conn->query($sql)==TRUE) {
     else{
         echo "Error:".$sql."<br>".$conn->error;
     }
-     header('Location:Home.html');
+     header('Location:index.html');
 
 $conn->close();
     
